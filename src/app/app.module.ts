@@ -11,6 +11,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatInputModule } from '@angular/material/input';
+import { environment } from 'src/environments/environment';
+
 
 
 @NgModule({
@@ -30,7 +32,9 @@ import { MatInputModule } from '@angular/material/input';
     MatToolbarModule,
     MatInputModule
   ],
-  providers: [],
+  providers: [
+    { provide: 'API_URL', useValue: environment.apiBaseUrl }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

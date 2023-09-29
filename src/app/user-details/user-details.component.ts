@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 interface User {
   id: number;
@@ -31,7 +32,7 @@ export class UserDetailsComponent implements OnInit {
   }
 
   fetchUser(id: string): void {
-    const url = `https://reqres.in/api/users/${id}`;
+    const url = `${environment.apiBaseUrl}/users/${id}`;
 
     this.http.get<any>(url).subscribe(response => {
       this.user = response.data;

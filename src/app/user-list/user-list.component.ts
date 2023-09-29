@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 interface User {
   id: number;
@@ -24,7 +25,7 @@ export class UserListComponent implements OnInit {
 
   fetchUsers(): void {
     const page = 1; // Example: Fetch users from the first page
-    const url = `https://reqres.in/api/users?page=${page}`;
+    const url = `${environment.apiBaseUrl}/users?page=${page}`;
 
     this.http.get<any>(url).subscribe(response => {
       this.users = response.data;
