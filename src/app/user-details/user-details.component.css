@@ -1,0 +1,46 @@
+/* Custom styles for the user-details.component */
+.user-details-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .user-card {
+    width: 300px;
+    background-color: #ffcc80; /* Background color for the user card */
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .avatar-container {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .avatar {
+    max-width: 100px;
+    max-height: 100px;
+    border-radius: 50%;
+  }
+  
+  .user-info {
+    text-align: center;
+    padding: 10px;
+  }
+  
+  .user-name {
+    font-size: 1.2rem;
+    color: #333; /* Text color for the user's name */
+  }
+  
+  .user-id {
+    font-size: 1rem;
+    color: #777; /* Text color for the user's ID */
+  }
+  
+  /* Style for the Back button */
+  .mat-raised-button {
+    margin-top: 20px;
+  }
+  
