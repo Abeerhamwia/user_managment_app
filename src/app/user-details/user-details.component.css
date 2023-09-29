@@ -1,46 +1,62 @@
-/* Custom styles for the user-details.component */
-.user-details-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 20px;
-  }
-  
-  .user-card {
+/* Custom styles for the user card and user-details.component */
+.user-list-container, .user-details-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f0f0f0; /* Background color for the entire page */
+}
+
+.user-card {
     width: 300px;
-    background-color: #ffcc80; /* Background color for the user card */
+    margin: 10px;
+    background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent white background */
     border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease-in-out;
+    backdrop-filter: blur(10px); 
   }
-  
-  .avatar-container {
-    text-align: center;
-    padding: 20px;
-  }
-  
-  .avatar {
-    max-width: 100px;
-    max-height: 100px;
-    border-radius: 50%;
-  }
-  
-  .user-info {
-    text-align: center;
-    padding: 10px;
-  }
-  
-  .user-name {
-    font-size: 1.2rem;
-    color: #333; /* Text color for the user's name */
-  }
-  
-  .user-id {
-    font-size: 1rem;
-    color: #777; /* Text color for the user's ID */
-  }
-  
-  /* Style for the Back button */
-  .mat-raised-button {
-    margin-top: 20px;
-  }
-  
+
+.user-card:hover {
+  transform: scale(1.05); /* Add a hover effect */
+}
+
+.avatar-container {
+  text-align: center;
+  padding: 20px;
+}
+
+.avatar {
+  max-width: 100px;
+  max-height: 100px;
+  border-radius: 50%;
+}
+
+.user-info {
+  text-align: center;
+  padding: 10px;
+}
+
+.user-name {
+  font-size: 1.2rem;
+  color: #333; /* Text color for the user's name */
+}
+
+.user-id {
+  font-size: 1rem;
+  color: #777; /* Text color for the user's ID */
+}
+
+/* Style for the Back button */
+.mat-raised-button {
+  margin-top: 20px;
+  background-color: #333; /* Background color for the button */
+  color: #fff; /* Text color for the button */
+}
+
+.mat-raised-button:hover {
+  background-color: #555; /* Hover color for the button */
+}
+
+

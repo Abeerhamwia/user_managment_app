@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
 interface User {
@@ -17,15 +17,17 @@ interface User {
 export class UserDetailsComponent implements OnInit {
   user: User | null = null;
 
-  constructor(private route: ActivatedRoute, private http: HttpClient) { }
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router, // Inject Router for navigation
+    private http: HttpClient
+  ) { }
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
-      const id = params['id'];
-      if (id) {
-        this.fetchUser(id);
-      }
-    });
+    const id = this.route.snapshot.paramMap.get('id');
+    if (id) {
+      this.fetchUser(id);
+    }
   }
 
   fetchUser(id: string): void {
@@ -34,5 +36,9 @@ export class UserDetailsComponent implements OnInit {
     this.http.get<any>(url).subscribe(response => {
       this.user = response.data;
     });
+  }
+
+  goBack(): void {
+    this.router.navigate(['/users']);
   }
 }
