@@ -19,6 +19,7 @@ interface User {
 })
 export class UserDetailsComponent implements OnInit {
   user: User | null = null;
+  isLoading: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -34,18 +35,22 @@ export class UserDetailsComponent implements OnInit {
       if (cachedUser) {
         this.user = cachedUser;
       } else {
-        this.fetchUser(id);
+        this.fetchUsersDetails(id);
       }
     }
   }
 
-  fetchUser(id: string): void {
-    const url = `${environment.apiBaseUrl}/users/${id}`;
+  fetchUsersDetails(id: string): void {
+    this.isLoading = true;
 
-    this.http.get<any>(url).subscribe(response => {
-      this.user = response.data;
-      this.cacheService.set(`user-${id}`, this.user);
-    });
+    setTimeout(() => {
+      const url = `${environment.apiBaseUrl}/users/${id}`;
+      this.http.get<any>(url).subscribe(response => {
+        this.user = response.data;
+        this.cacheService.set(`user-${id}`, this.user);
+        this.isLoading = false;
+      });
+    }, 1000);
   }
 
   goBack(): void {

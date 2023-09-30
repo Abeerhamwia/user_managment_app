@@ -17,6 +17,7 @@ interface User {
 })
 export class UserListComponent implements OnInit {
   users: User[] = [];
+  isLoading: boolean = false;
 
   constructor(private http: HttpClient, private cacheService: CacheService) { }
 
@@ -30,12 +31,17 @@ export class UserListComponent implements OnInit {
   }
 
   fetchUsers(): void {
-    const page = 1;
-    const url = `${environment.apiBaseUrl}/users?page=${page}`;
+    this.isLoading = true;
 
-    this.http.get<any>(url).subscribe(response => {
-      this.users = response.data;
-      this.cacheService.set('users', this.users);
-    });
+    setTimeout(() => {
+      const page = 1;
+      const url = `${environment.apiBaseUrl}/users?page=${page}`;
+
+      this.http.get<any>(url).subscribe(response => {
+        this.users = response.data;
+        this.cacheService.set('users', this.users);
+        this.isLoading = false;
+      });
+    }, 1000);
   }
 }

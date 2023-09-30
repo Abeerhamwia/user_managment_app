@@ -12,6 +12,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatInputModule } from '@angular/material/input';
 import { environment } from 'src/environments/environment';
+import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 
@@ -19,7 +21,8 @@ import { environment } from 'src/environments/environment';
   declarations: [
     AppComponent,
     UserListComponent,
-    UserDetailsComponent
+    UserDetailsComponent,
+    LoadingSpinnerComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +33,8 @@ import { environment } from 'src/environments/environment';
     MatCardModule,
     MatIconModule,
     MatToolbarModule,
-    MatInputModule
+    MatInputModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     { provide: 'API_URL', useValue: environment.apiBaseUrl }
