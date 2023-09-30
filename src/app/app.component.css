@@ -6,7 +6,7 @@
 }
 
 .search-field {
-  width: 300px;
+  width: 200px;
 }
 
 /* Center the search bar vertically within the header */
@@ -21,16 +21,16 @@
   font-size: 1rem;
 }
 
-/* Add hover and focus styles to the input field */
+
 .mat-form-field-appearance-fill .mat-form-field-infix {
-  border-color: #333; /* Border color on hover and focus */
+  border-color: #333; 
 }
 
-/* Remove the outline on focus */
+
 .mat-focused .mat-form-field-underline {
   display: none;
 }
-/* Custom styles for the header and search bar */
+/* for the header and search bar */
 .app-title {
   font-size: 1.5rem;
   font-weight: bold;
@@ -38,10 +38,11 @@
 }
 
 .search-field {
+  margin-top: 20px;
   width: 300px;
 }
 
-/* Center the search bar vertically within the header */
+/* Center the search */
 .mat-toolbar-row {
   justify-content: space-between;
   align-items: center;
@@ -49,16 +50,16 @@
 
 /* Style the input field */
 .mat-input-element {
-  color: #333; /* Text color for the input field */
+  color: #333; /* Text color input*/
   font-size: 1rem;
 }
 
-/* Add hover and focus styles to the input field */
+
 .mat-form-field-appearance-fill .mat-form-field-infix {
-  border-color: #333; /* Border color on hover and focus */
+  border-color: #333; 
 }
 
-/* Remove the outline on focus */
+
 .mat-focused .mat-form-field-underline {
   display: none;
 }

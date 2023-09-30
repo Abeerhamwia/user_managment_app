@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { CacheService } from '../cache.service';
 
 interface User {
   id: number;
@@ -17,18 +18,24 @@ interface User {
 export class UserListComponent implements OnInit {
   users: User[] = [];
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private cacheService: CacheService) { }
 
   ngOnInit(): void {
-    this.fetchUsers();
+    const cachedUsers = this.cacheService.get('users');
+    if (cachedUsers) {
+      this.users = cachedUsers;
+    } else {
+      this.fetchUsers();
+    }
   }
 
   fetchUsers(): void {
-    const page = 1; // Example: Fetch users from the first page
+    const page = 1;
     const url = `${environment.apiBaseUrl}/users?page=${page}`;
 
     this.http.get<any>(url).subscribe(response => {
       this.users = response.data;
+      this.cacheService.set('users', this.users);
     });
   }
 }

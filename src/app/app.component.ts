@@ -13,10 +13,10 @@ export class AppComponent {
 
   onSearch(): void {
     if (this.search) {
-      // Navigate to the user details page if a search term is entered
+      // Redirect to the user details if a search entered
       this.router.navigate(['/user', this.search]);
     } else {
-      // Redirect to the user list page if the search term is empty
+      // Redirect to the user list if the search empty
       this.router.navigate(['/users']);
     }
   }

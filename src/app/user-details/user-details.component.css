@@ -5,13 +5,13 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #f0f0f0; /* Background color for the entire page */
+  background-color: #f0f0f0; 
 }
 
 .user-card {
     width: 300px;
     margin: 10px;
-    background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent white background */
+    background-color: rgba(14, 15, 81, 0.1);
     border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
     transition: transform 0.2s ease-in-out;
@@ -19,7 +19,7 @@
   }
 
 .user-card:hover {
-  transform: scale(1.05); /* Add a hover effect */
+  transform: scale(1.05); 
 }
 
 .avatar-container {
@@ -40,23 +40,21 @@
 
 .user-name {
   font-size: 1.2rem;
-  color: #333; /* Text color for the user's name */
+  color: #333; 
+}
+
+.user-email {
+  font-size: 1.2rem;
+  color: #333; 
 }
 
 .user-id {
   font-size: 1rem;
-  color: #777; /* Text color for the user's ID */
+  color: #777; 
 }
 
-/* Style for the Back button */
-.mat-raised-button {
-  margin-top: 20px;
-  background-color: #333; /* Background color for the button */
-  color: #fff; /* Text color for the button */
-}
 
-.mat-raised-button:hover {
-  background-color: #555; /* Hover color for the button */
-}
+
+
 
 
