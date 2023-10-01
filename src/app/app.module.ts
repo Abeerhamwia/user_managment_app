@@ -14,10 +14,8 @@ import { MatInputModule } from '@angular/material/input';
 import { environment } from 'src/environments/environment';
 import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { SearchComponent } from './search/search.component';
 import { SharedModule } from './shared/shared.module';
-
-
+import { MatFormFieldModule } from '@angular/material/form-field'; 
 
 @NgModule({
   declarations: [
@@ -25,7 +23,6 @@ import { SharedModule } from './shared/shared.module';
     UserListComponent,
     UserDetailsComponent,
     LoadingSpinnerComponent,
-    SearchComponent
   ],
   imports: [
     BrowserModule,
@@ -38,11 +35,12 @@ import { SharedModule } from './shared/shared.module';
     MatToolbarModule,
     MatInputModule,
     MatProgressSpinnerModule,
-    SharedModule
+    SharedModule,
+    MatFormFieldModule
   ],
   providers: [
-    { provide: 'API_URL', useValue: environment.apiBaseUrl }
+    { provide: 'API_URL', useValue: environment.apiBaseUrl },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

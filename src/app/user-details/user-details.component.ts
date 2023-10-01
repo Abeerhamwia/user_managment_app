@@ -21,7 +21,7 @@ export class UserDetailsComponent implements OnInit {
   user: User | null = null;
   isLoading: boolean = false;
   userNotFound: boolean = false;
-  userId: string | null = null; // Public property to store the user ID
+  userId: string | null = null;
 
   constructor(
     private route: ActivatedRoute,
@@ -31,40 +31,44 @@ export class UserDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    
-    this.userId = this.route.snapshot.paramMap.get('id');
+    this.route.paramMap.subscribe(params => {
+      this.userId = params.get('id');
 
-    if (this.userId) {
-      const cachedUser = this.cacheService.get(`user-${this.userId}`);
-      if (cachedUser) {
-        this.user = cachedUser;
-      } else {
-        this.fetchUser(this.userId);
+      if (this.userId) {
+        const cachedUser = this.cacheService.get(`user-${this.userId}`);
+        if (cachedUser) {
+          this.user = cachedUser;
+        } else {
+          this.fetchUser(this.userId);
+        }
       }
-    }
+    });
   }
 
   fetchUser(id: string): void {
     this.isLoading = true;
-
+    this.userNotFound = false;
+  
     const url = `${environment.apiBaseUrl}/users/${id}`;
-    
-    this.http.get<any>(url).subscribe(
-      response => {
-        this.user = response.data;
-        this.cacheService.set(`user-${id}`, this.user);
-        this.isLoading = false;
-
-        if (!this.user) {
+  
+    setTimeout(() => {
+      this.http.get<any>(url).subscribe(
+        response => {
+          this.user = response.data;
+          this.cacheService.set(`user-${id}`, this.user);
+          this.isLoading = false;
+  
+          if (!this.user) {
+            this.userNotFound = true;
+          }
+        },
+        error => {
+          console.error('Error fetching user:', error);
+          this.isLoading = false;
           this.userNotFound = true;
         }
-      },
-      error => {
-        console.error('Error fetching user:', error);
-        this.isLoading = false;
-        this.userNotFound = true;
-      }
-    );
+      );
+    }, 1000); 
   }
 
   goBack(): void {

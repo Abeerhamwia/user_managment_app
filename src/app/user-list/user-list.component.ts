@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router'; // Import NavigationEnd
 import { environment } from 'src/environments/environment';
 import { CacheService } from '../cache.service';
 
@@ -21,7 +22,22 @@ export class UserListComponent implements OnInit {
   currentPage: number = 1; // Initial page
   totalPages: number = 0;
 
-  constructor(private http: HttpClient, private cacheService: CacheService) { }
+  constructor(
+    private http: HttpClient,
+    private cacheService: CacheService,
+    private router: Router, 
+    private activatedRoute: ActivatedRoute 
+  ) {
+    
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        // Check if the user navigated back from the details page
+        if (this.activatedRoute.snapshot.url[0].path === 'users' && !this.isLoading) {
+          this.fetchUsers(); 
+        }
+      }
+    });
+  }
 
   ngOnInit(): void {
     const cachedUsers = this.cacheService.get('users');
@@ -47,14 +63,14 @@ export class UserListComponent implements OnInit {
 
   loadNextPage(): void {
     if (this.currentPage < this.totalPages) {
-      this.currentPage++; 
+      this.currentPage++;
       this.fetchUsers();
     }
   }
 
   loadPreviousPage(): void {
     if (this.currentPage > 1) {
-      this.currentPage--; 
+      this.currentPage--;
       this.fetchUsers();
     }
   }
