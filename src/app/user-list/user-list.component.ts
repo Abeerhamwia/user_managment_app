@@ -18,6 +18,8 @@ interface User {
 export class UserListComponent implements OnInit {
   users: User[] = [];
   isLoading: boolean = false;
+  currentPage: number = 1; // Initial page
+  totalPages: number = 0;
 
   constructor(private http: HttpClient, private cacheService: CacheService) { }
 
@@ -33,15 +35,27 @@ export class UserListComponent implements OnInit {
   fetchUsers(): void {
     this.isLoading = true;
 
-    setTimeout(() => {
-      const page = 1;
-      const url = `${environment.apiBaseUrl}/users?page=${page}`;
+    const url = `${environment.apiBaseUrl}/users?page=${this.currentPage}`;
 
-      this.http.get<any>(url).subscribe(response => {
-        this.users = response.data;
-        this.cacheService.set('users', this.users);
-        this.isLoading = false;
-      });
-    }, 1000);
+    this.http.get<any>(url).subscribe(response => {
+      this.users = response.data;
+      this.totalPages = response.total_pages;
+      this.cacheService.set('users', this.users);
+      this.isLoading = false;
+    });
+  }
+
+  loadNextPage(): void {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++; 
+      this.fetchUsers();
+    }
+  }
+
+  loadPreviousPage(): void {
+    if (this.currentPage > 1) {
+      this.currentPage--; 
+      this.fetchUsers();
+    }
   }
 }

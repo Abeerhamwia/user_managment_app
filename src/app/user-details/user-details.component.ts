@@ -20,6 +20,8 @@ interface User {
 export class UserDetailsComponent implements OnInit {
   user: User | null = null;
   isLoading: boolean = false;
+  userNotFound: boolean = false;
+  userId: string | null = null; // Public property to store the user ID
 
   constructor(
     private route: ActivatedRoute,
@@ -29,28 +31,40 @@ export class UserDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id');
-    if (id) {
-      const cachedUser = this.cacheService.get(`user-${id}`);
+    
+    this.userId = this.route.snapshot.paramMap.get('id');
+
+    if (this.userId) {
+      const cachedUser = this.cacheService.get(`user-${this.userId}`);
       if (cachedUser) {
         this.user = cachedUser;
       } else {
-        this.fetchUsersDetails(id);
+        this.fetchUser(this.userId);
       }
     }
   }
 
-  fetchUsersDetails(id: string): void {
+  fetchUser(id: string): void {
     this.isLoading = true;
 
-    setTimeout(() => {
-      const url = `${environment.apiBaseUrl}/users/${id}`;
-      this.http.get<any>(url).subscribe(response => {
+    const url = `${environment.apiBaseUrl}/users/${id}`;
+    
+    this.http.get<any>(url).subscribe(
+      response => {
         this.user = response.data;
         this.cacheService.set(`user-${id}`, this.user);
         this.isLoading = false;
-      });
-    }, 1000);
+
+        if (!this.user) {
+          this.userNotFound = true;
+        }
+      },
+      error => {
+        console.error('Error fetching user:', error);
+        this.isLoading = false;
+        this.userNotFound = true;
+      }
+    );
   }
 
   goBack(): void {

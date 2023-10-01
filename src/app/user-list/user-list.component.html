@@ -12,3 +12,11 @@
     </div>
   </mat-card>
 </div>
+<div class="pagination-controls">
+  <button mat-fab color="primary" (click)="loadPreviousPage()" [disabled]="currentPage === 1">
+    <mat-icon>keyboard_arrow_left</mat-icon>
+  </button>
+  <button mat-fab color="primary" (click)="loadNextPage()" [disabled]="currentPage === totalPages">
+    <mat-icon>keyboard_arrow_right</mat-icon>
+  </button>
+</div>

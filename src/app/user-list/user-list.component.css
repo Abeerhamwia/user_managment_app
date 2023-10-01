@@ -49,3 +49,47 @@
   font-size: 1rem;
   color: #777; /* Text color for the user's ID */
 }
+
+/* Center the arrow buttons at the bottom of the page */
+.pagination-controls {
+  position: fixed;
+  bottom: 20px; /* Adjust the distance from the bottom as needed */
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999; /* Ensure it's above other content */
+}
+
+/* Style for the circular buttons */
+.pagination-controls button {
+  width: 50px; /* Adjust the button size as needed */
+  height: 50px; /* Adjust the button size as needed */
+  border-radius: 50%; /* Make the button circular */
+  margin: 0 5px; /* Add some spacing between buttons */
+  background-color: #007bff; /* Button background color */
+  color: white; /* Text color */
+  
+  transition: background-color 0.2s ease-in-out;
+}
+
+  /* Style for the circular buttons on hover */
+  .pagination-controls button:hover {
+    background-color: #0056b3; /* Hover background color */
+  }
+
+/* Center the arrow icon vertically and horizontally */
+.pagination-controls button mat-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+/* Adjust the size of the arrow icon (optional) */
+.pagination-controls button mat-icon {
+  font-size: 24px; /* Adjust the size as needed */
+}
+
+
